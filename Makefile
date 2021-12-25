@@ -1,23 +1,31 @@
 CC = gcc
 AR = ar
 OBJECTS_MAIN = main.o
-OBJECTS_MY_MAT = my_mat.o
-OBJECTS_HEADER = my_mat.h
+OBJECTS_EDGE = edge.o
+OBJECTS_NODE = node.o
+EDGE_HEADER = edge.h
+NODE_HEADER = node.h
 FLAGS = -Wall -g
 
-#all: connections
-#
-#connections: $(OBJECTS_MAIN) libmy_mat.a
-#	$(CC) $(FLAGS) -o connections $(OBJECTS_MAIN) libmy_mat.a
-#
-#libmy_mat.a: $(OBJECTS_MY_MAT)
-#	$(AR) -rcs libmy_mat.a $(OBJECTS_MY_MAT) # create static library
-#
-#main.o: main.c $(OBJECTS_HEADER)
-#	$(CC) $(FLAGS) -c main.c
-#
-#my_mat.o: my_mat.c $(OBJECTS_HEADER)
-#	$(CC) $(FLAGS) -c my_mat.c
-#
-#clean:
-#	rm -f *.o *.a connections
+all: graphProg
+
+graphProg: $(OBJECTS_MAIN) lib_edge.a lib_node.a
+	$(CC) $(FLAGS) -o graphProg $(OBJECTS_MAIN) lib_edge.a lib_node.a
+
+lib_node.a: $(OBJECTS_NODE)
+	$(AR) -rcs lib_node.a $(OBJECTS_NODE) # create static library
+
+lib_edge.a: $(OBJECTS_EDGE)
+	$(AR) -rcs lib_edge.a $(OBJECTS_EDGE) # create static library
+
+main.o: main.c
+	$(CC) $(FLAGS) -c main.c
+
+node.o: node.c $(NODE_HEADER)
+	$(CC) $(FLAGS) -c node.c
+
+edge.o: edge.c $(EDGE_HEADER)
+	$(CC) $(FLAGS) -c edge.c
+
+clean:
+	rm -f *.o *.a graphProg
