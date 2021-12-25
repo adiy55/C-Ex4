@@ -1,28 +1,31 @@
 #ifndef C_EX4_ALGO_H
 #define C_EX4_ALGO_H
 
-typedef struct GRAPH_NODE_ *pnode;;
+typedef struct graph_node *pnode;
 
-typedef struct edge_ {
+typedef struct graph_edge {
     int weight;
-    pnode endpoint;
-    struct edge_ *next;
+    pnode dest_node;
+    struct graph_edge *next;
 } edge, *pedge;
 
 
-typedef struct GRAPH_NODE_ {
-    int node_num;
+typedef struct graph_node {
+    int node_id;
     pedge edges;
-    struct GRAPH_NODE_ *next;
+    struct graph_node *next;
 } node, *pnode;
 
-void build_graph_cmd(pnode *head);
-void insert_node_cmd(pnode *head);
-void delete_node_cmd(pnode *head);
-void printGraph_cmd(pnode head); //for self debug
-void deleteGraph_cmd(pnode* head);
-void shortsPath_cmd(pnode head);
-void TSP_cmd(pnode head);
+// cmd functions
+void buildGraph_CMD(pnode *head);
+void addNode_CMD(pnode *head);
+void deleteNode_CMD(pnode *head);
+void printGraph_CMD(pnode head); // for self debug
+void deleteGraph_CMD(pnode* head);
+void shortestPath_CMD(pnode head);
+void TSP_CMD(pnode head);
+
+// algorithms
 int shortestPath(pnode src, pnode dest);
 int dijkstra();
 
