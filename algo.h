@@ -18,12 +18,16 @@ typedef struct graph_node {
 
 // cmd functions
 void buildGraph_CMD(p_node *head);
-void addNode_CMD(p_node *head, p_node *input_node);
+void addNode_CMD(node **head);
 void deleteNode_CMD(p_node *head);
 void printGraph_CMD(p_node head); // for self debug
 void deleteGraph_CMD(p_node* head);
 void shortestPath_CMD(p_node head);
 void TSP_CMD(p_node head);
+
+// helper functions
+void free_node(p_node n);
+void add_edge(p_node n, int dest, int weight);
 
 // algorithms
 int shortestPath(p_node src, p_node dest);
