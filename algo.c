@@ -36,24 +36,29 @@ void insert_append(p_node *anchor, p_node *newNode) {
 }
 
 
-
 void buildGraph_CMD(p_node *head) {
     deleteGraph_CMD(&head);
+    int k;
+    char tmp;
+    scanf( "%d", &k);
+    while(scanf("%c",&tmp)!= NULL){
+
+    }
 
 }
 
-void deleteGraph_CMD(p_node* head){
-p_node *curr_node = head, *tmp_node;
-p_edge *curr_edges, *tmp_edges;
-while (*curr_node != NULL) {
-*curr_edges = (*curr_node)->edges;
-while (*curr_edges != NULL) {
-*tmp_edges = (*curr_edges);
-*curr_edges = (*curr_edges)->next;
-free(*tmp_edges); // todo: is the dest_node an address? or does it delete the actual node?
-}
-*tmp_node = *curr_node;
-*curr_node = (*curr_node)->next;
-free(*tmp_node);
-}
+void deleteGraph_CMD(p_node *head) {
+    p_node *curr_node = head, *tmp_node;
+    p_edge *curr_edges, *tmp_edges;
+    while (*curr_node != NULL) {
+        *curr_edges = (*curr_node)->edges;
+        while (*curr_edges != NULL) {
+            *tmp_edges = (*curr_edges);
+            *curr_edges = (*curr_edges)->next;
+            free(*tmp_edges); // todo: is the dest_node an address? or does it delete the actual node?
+        }
+        *tmp_node = *curr_node;
+        *curr_node = (*curr_node)->next;
+        free(*tmp_node);
+    }
 }

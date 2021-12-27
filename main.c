@@ -6,27 +6,35 @@
 int main() {
     int run = 1, len_path;
     char action = 'A';
-    while (run) {
         // action A: insert a new graph
         // action B: create new node with new out edges
         // action D: delete node
+        // action P: print node
         // action S: shortest path between two given nodes
         // action T: TSP
         scanf("%c", &action);
-      if (action == 'A') {
-            insert(matrix);
-        } else {
-            calc_matrix(); // calculate the shortest path
-            if (action == 'B') {
-                is_there_a_route(shortest_path) ? printf("True\n") : printf("False\n");
-            } else if (action == 'D') {
-                len_path = what_is_the_shortest_route(shortest_path);
-                len_path ? printf("%d\n", len_path) : printf("-1\n");
-            } else if (action == 'S'){
-
-            } else if (action == 'T'){
-
-            }
+    p_node head = NULL;
+    while(run){
+        if (action == 'A'){
+            deleteGraph_CMD(&head);
+//            scanf("%d", &k);
+//            head = generate(k);
+            buildGraph_CMD(&head);
+        }
+        if (action == 'B'){
+            addNode_CMD(&head);
+        }
+        if (action=='p'){
+            printGraph_CMD(head);
+        }
+        if (action=='S'){
+            shortestPath_CMD(head);
+        }
+        if (action=='D'){
+            deleteNode_CMD(&head);
+        }
+        if (action=='T'){
+            TSP_CMD(head);
         }
     }
     return 0;
