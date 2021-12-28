@@ -80,3 +80,33 @@ void free_node(p_node n) {
     }
     free(n);
 }
+
+int findNode(p_node *head, int idx) {
+    while (head != NULL) {
+        if ((*head)->node_id == idx) {
+            return 0;
+        }
+        *head = (*head)->next;
+    }
+    return 1;
+}
+
+int findEdge(p_node *head, int srcNode, int dest) {
+    while (head != NULL) {
+        if ((*head)->node_id == srcNode) {
+            break;
+        }
+        *head = (*head)->next;
+    }
+    while ((*head)->edges != NULL) {
+        if ((*head)->edges->dest_node == dest) {
+            return 0;
+        }
+        (*head)->edges = (*head)->edges->next;
+    }
+    return 1;
+}
+
+void addEdge(p_node *head,p_edge input){
+//    int exist = findEdge()
+}

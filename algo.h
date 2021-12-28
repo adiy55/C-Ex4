@@ -28,6 +28,9 @@ void TSP_CMD(p_node head);
 // helper functions
 void free_node(p_node n);
 void add_edge(p_node n, int dest, int weight);
+int findNode(p_node *head, int idx); // return 0 if found - otherwise return 1
+int findEdge(p_node *head, int srcNode, int dest); // return 0 if found - otherwise return 1
+void addEdge(p_node *head, p_edge input);
 
 // algorithms
 int shortestPath(p_node src, p_node dest);
