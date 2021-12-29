@@ -8,17 +8,32 @@
 p_node addNode(node **head, int srcID);
 
 void addNode_CMD(node **head) {
-    int c;
+    int c, weight;
+    p_node currNode, exist;
+    p_edge edge_exist;
+    scanf("%d", &c);
+    currNode = addNode(head, c);
+    if (currNode == NULL) {
+        printf("There is a memory allocate problem\n");
+    }
     while (scanf("%d", &c)) {
         if (isupper(c) || c == '\n') {
             ACTION = c;
             return;
         }
+        scanf("%d", &weight);
+        exist = findNode(head, c);
+        if (exist != NULL) { // if exist isn't NULL
+            edge_exist = findEdge(currNode, c);
+            if (edge_exist != NULL) { // edge_exist isn't NULL
+                freeEdge(currNode->edges, exist);
+            }
 
-        while (scanf("%d", &c) && isdigit(c)) {
+        } else {
+            p_node dest_node = addNode(head, c);
 
         }
-//    addNode(head, );
+        addEdge(currNode, c, weight);
     }
 }
 
@@ -68,7 +83,7 @@ p_node addNode(node **head, int srcID) {
 
 void buildGraph_CMD(p_node *head) {
     deleteGraph_CMD(&head);
-    int k;
+    int c, numOfNodes;
     char tmp;
     p_node curr_node;
     // number of nodes,
