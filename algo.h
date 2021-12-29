@@ -1,7 +1,7 @@
 #ifndef C_EX4_ALGO_H
 #define C_EX4_ALGO_H
 
-int ACTION;
+char ACTION;
 
 typedef struct graph_node *p_node;
 
