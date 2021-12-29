@@ -85,7 +85,7 @@ void buildGraph_CMD(p_node *head) {
     deleteGraph_CMD(head);
     int c, weight, numOfNodes, currNodeID;
     char tmp;
-    p_node curr_node,curr_dest;
+    p_node curr_node, curr_dest;
     p_edge curr_edge;
     scanf('%d', &numOfNodes);
     while (scanf("%d", &c)) {
@@ -96,25 +96,48 @@ void buildGraph_CMD(p_node *head) {
         if (c == 'n') {
             if (scanf("%d", &c)) {
                 currNodeID = c;
-                curr_node = findNode(head,c);
-                if(curr_node==NULL) {
+                curr_node = findNode(head, c);
+                if (curr_node == NULL) {
                     curr_node = addNode(head, c);
                 }
             }
         }
-        if(isdigit(c)){
-            curr_dest = findNode(head,c);
-            if(curr_dest==NULL){
-                addNode(head,c);
+        if (isdigit(c)) {
+            curr_dest = findNode(head, c);
+            if (curr_dest == NULL) {
+                addNode(head, c);
             }
-            if(scanf("%d",&weight)){
-                curr_edge = findEdge(curr_node,c);
-                if(curr_edge!=NULL){
-                    freeEdge(&(curr_node->edges),curr_node);
+            if (scanf("%d", &weight)) {
+                curr_edge = findEdge(curr_node, c);
+                if (curr_edge != NULL) {
+                    freeEdge(&(curr_node->edges), curr_node);
                 }
-                addEdge(curr_node,curr_dest,weight);
+                addEdge(curr_node, curr_dest, weight);
             }
         }
+    }
+}
+
+void deleteNode_CMD(p_node *head) {
+    int reqNode;
+    scanf("%d", &reqNode);
+    if (*head == NULL) {
+        printf("No Nodes at all!");
+        return;
+    }
+    p_node iter = *head;
+    if(iter->next == NULL){
+        if(iter->node_id == reqNode){
+            free_node(iter);
+        }
+    }
+    while (iter->next != NULL) {
+        if(iter->next->node_id==reqNode) {
+            iter->next = iter->next->next;
+            free_node(iter->next);
+            return;
+        }
+        iter = iter->next;
     }
 }
 
@@ -198,7 +221,7 @@ void addEdge(p_node src, p_node dest, int weight) {
     new_edge->dest_node = dest;
     new_edge->weight = weight;
     p_edge tmp = src->edges;
-    if(tmp == NULL){
+    if (tmp == NULL) {
         new_edge->next = NULL;
         src->edges = new_edge;
         return;
