@@ -1,19 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "algo.h"
 
 //#include <math.h>
 
+p_node addNode(node **head, int srcID);
+
 void addNode_CMD(node **head) {
+    int c;
+    while (scanf("%d", &c)) {
+        if (isupper(c) || c == '\n') {
+            ACTION = c;
+            return;
+        }
+
+        while (scanf("%d", &c) && isdigit(c)) {
+
+        }
+//    addNode(head, );
+    }
+}
+
+p_node addNode(node **head, int srcID) {
     p_node input_node = (node *) malloc(sizeof(node));
-    if (input_node == NULL) {
-        return;
+    if (input_node == NULL) { // check if memory was successfully allocated
+        return NULL;
     }
     input_node->next = NULL;
-//    input_node->node_id =
+    input_node->node_id = srcID;
     if (*head == NULL) {
         *head = input_node;
-        return;
+        return input_node;
     }
     p_node iter = *head;
     if (iter->next == NULL) {
@@ -21,11 +39,14 @@ void addNode_CMD(node **head) {
             input_node->next = iter;
             iter->next = NULL;
             *head = input_node;
+            return input_node;
         } else if (iter->node_id > input_node->node_id) {
             iter->next = input_node;
+            return input_node;
         } else {
             *head = input_node;
             free(iter);
+            return input_node;
         }
     }
     while (iter->next != NULL) {
@@ -33,10 +54,11 @@ void addNode_CMD(node **head) {
             input_node->next = iter->next->next;
             free_node(iter->next);
             iter->next = input_node;
+            return input_node;
         } else if (iter->next->node_id > input_node->node_id) {
             input_node->next = iter->next;
             iter->next = input_node;
-            return;
+            return input_node;
         } else {
             iter = iter->next;
         }
@@ -48,11 +70,21 @@ void buildGraph_CMD(p_node *head) {
     deleteGraph_CMD(&head);
     int k;
     char tmp;
-    scanf("%d", &k);
-    while (scanf("%c", &tmp) != NULL) {
+    p_node curr_node;
+    // number of nodes,
+    scanf('%d', &numOfNodes);
+    while (scanf("%d", &c)) {
+        if (isupper(c) || c == '\n') {
+            ACTION = c;
+            return;
+        }
+        if (c == 'n') {
+            if (scanf("%d", &c)) {
+                curr_node = addNode(head, c);
 
+            }
+        }
     }
-
 }
 
 void deleteGraph_CMD(p_node *head) {
@@ -81,32 +113,35 @@ void free_node(p_node n) {
     free(n);
 }
 
-int findNode(p_node *head, int idx) {
-    while (head != NULL) {
-        if ((*head)->node_id == idx) {
-            return 0;
-        }
-        *head = (*head)->next;
+p_node findNode(p_node *head, int idx) {
+    if (*head == NULL) {
+        return NULL;
     }
-    return 1;
+    p_node iter = *head;
+    while (iter != NULL) {
+        if (iter->node_id == idx) {
+            return iter;
+        }
+        iter = iter->next;
+    }
+    return NULL;
 }
 
-int findEdge(p_node *head, int srcNode, int dest) {
-    while (head != NULL) {
-        if ((*head)->node_id == srcNode) {
-            break;
-        }
-        *head = (*head)->next;
+p_edge findEdge(p_node src_node, int destID) {
+    p_edge iter = src_node->edges;
+    if (iter == NULL) { // no edges
+        return NULL;
     }
-    while ((*head)->edges != NULL) {
-        if ((*head)->edges->dest_node == dest) {
-            return 0;
+    while (iter != NULL) {
+        if (iter->dest_node->node_id == destID) {
+            return iter;
         }
-        (*head)->edges = (*head)->edges->next;
+        iter = iter->next;
     }
-    return 1;
+    return NULL;
 }
 
-void addEdge(p_node *head,p_edge input){
+
+void addEdge(p_node *head, int dest, int weight) {
 //    int exist = findEdge()
 }

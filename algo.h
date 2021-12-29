@@ -1,6 +1,8 @@
 #ifndef C_EX4_ALGO_H
 #define C_EX4_ALGO_H
 
+int ACTION;
+
 typedef struct graph_node *p_node;
 
 typedef struct graph_edge {
@@ -27,10 +29,9 @@ void TSP_CMD(p_node head);
 
 // helper functions
 void free_node(p_node n);
-void add_edge(p_node n, int dest, int weight);
-int findNode(p_node *head, int idx); // return 0 if found - otherwise return 1
-int findEdge(p_node *head, int srcNode, int dest); // return 0 if found - otherwise return 1
-void addEdge(p_node *head, p_edge input);
+p_node findNode(p_node *head, int idx); // return 0 if found - otherwise return 1
+p_edge findEdge(p_node curr_node, int destID)
+void addEdge(p_node *head, int dest,int weight);
 
 // algorithms
 int shortestPath(p_node src, p_node dest);
