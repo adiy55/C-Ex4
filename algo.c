@@ -113,6 +113,26 @@ void free_node(p_node n) {
     free(n);
 }
 
+void freeEdge(p_edge *edges, p_node node) {
+    if (*edges == NULL) { // empty linked list
+        return;
+    }
+    p_edge iter = *edges;
+    if (iter->next == NULL) { // one edge in list
+        if (iter->dest_node == node) {
+            free(iter);
+        }
+        return;
+    }
+    while (iter->next != NULL) { // two or more edges in list
+        if (iter->next->dest_node == node) {
+            p_edge tmp = iter->next;
+            iter->next = iter->next->next;
+            free(tmp);
+        }
+    }
+}
+
 p_node findNode(p_node *head, int idx) {
     if (*head == NULL) {
         return NULL;
@@ -142,6 +162,16 @@ p_edge findEdge(p_node src_node, int destID) {
 }
 
 
-void addEdge(p_node *head, int dest, int weight) {
-//    int exist = findEdge()
+void addEdge(p_node src, p_node dest, int weight) {
+    p_edge new_edge = (edge *) malloc(sizeof(edge));
+    new_edge->dest_node = dest;
+    new_edge->weight = weight;
+    p_edge iter = src->edges;
+    if(iter == NULL){
+        new_edge->next = NULL;
+        src->edges = new_edge;
+        return;
+    }
+    new_edge->next = iter;
+    src->edges = new_edge;
 }
