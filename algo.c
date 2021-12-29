@@ -82,11 +82,11 @@ p_node addNode(node **head, int srcID) {
 
 
 void buildGraph_CMD(p_node *head) {
-    deleteGraph_CMD(&head);
-    int c, numOfNodes;
+    deleteGraph_CMD(head);
+    int c, weight, numOfNodes, currNodeID;
     char tmp;
-    p_node curr_node;
-    // number of nodes,
+    p_node curr_node,curr_dest;
+    p_edge curr_edge;
     scanf('%d', &numOfNodes);
     while (scanf("%d", &c)) {
         if (isupper(c) || c == '\n') {
@@ -95,8 +95,11 @@ void buildGraph_CMD(p_node *head) {
         }
         if (c == 'n') {
             if (scanf("%d", &c)) {
-                curr_node = addNode(head, c);
-
+                currNodeID = c;
+                curr_node = findNode(head,c);
+                if(curr_node==NULL) {
+                    curr_node = addNode(head, c);
+                }
             }
         }
     }
@@ -128,7 +131,7 @@ void free_node(p_node n) {
     free(n);
 }
 
-void freeEdge(p_edge *edges, p_node node) {
+void freeEdge(p_edge *edges, p_node node) { // node is the dest node of the edge (what we want to delete)
     if (*edges == NULL) { // empty linked list
         return;
     }
@@ -181,12 +184,12 @@ void addEdge(p_node src, p_node dest, int weight) {
     p_edge new_edge = (edge *) malloc(sizeof(edge));
     new_edge->dest_node = dest;
     new_edge->weight = weight;
-    p_edge iter = src->edges;
-    if(iter == NULL){
+    p_edge tmp = src->edges;
+    if(tmp == NULL){
         new_edge->next = NULL;
         src->edges = new_edge;
         return;
     }
-    new_edge->next = iter;
+    new_edge->next = tmp;
     src->edges = new_edge;
 }
