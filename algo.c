@@ -102,6 +102,19 @@ void buildGraph_CMD(p_node *head) {
                 }
             }
         }
+        if(isdigit(c)){
+            curr_dest = findNode(head,c);
+            if(curr_dest==NULL){
+                addNode(head,c);
+            }
+            if(scanf("%d",&weight)){
+                curr_edge = findEdge(curr_node,c);
+                if(curr_edge!=NULL){
+                    freeEdge(&(curr_node->edges),curr_node);
+                }
+                addEdge(curr_node,curr_dest,weight);
+            }
+        }
     }
 }
 
