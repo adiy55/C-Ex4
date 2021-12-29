@@ -30,7 +30,6 @@ int main() {
 //            run = 0;
 //        }
         printGraph_CMD(head);
-        run = 0;
 //        if (ACTION == 'S') {
 //            shortestPath_CMD(head);
 //        }
@@ -40,6 +39,9 @@ int main() {
 //        if (ACTION == 'T') {
 //            TSP_CMD(head);
 //        }
+        if (ACTION == '\n') {
+            run = 0;
+        }
     }
     return 0;
 }
