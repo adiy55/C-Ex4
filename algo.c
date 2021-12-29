@@ -44,6 +44,7 @@ p_node addNode(node **head, int srcID) {
     }
     input_node->next = NULL;
     input_node->node_id = srcID;
+    input_node->edges = NULL;
     if (*head == NULL) {
         *head = input_node;
         return input_node;
@@ -103,11 +104,11 @@ void buildGraph_CMD(p_node *head) {
             while (scanf("%d%d", &n, &weight)) {
                 curr_dest = findNode(head, n);
                 if (curr_dest == NULL) {
-                    addNode(head, n);
+                    curr_dest = addNode(head, n);
                 }
                 curr_edge = findEdge(curr_node, n);
                 if (curr_edge != NULL) {
-                    freeEdge(&(curr_node->edges), curr_node);
+                    freeEdge(&(curr_node->edges), curr_dest);
                 }
                 addEdge(curr_node, curr_dest, weight);
             }
