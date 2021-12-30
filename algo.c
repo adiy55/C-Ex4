@@ -5,6 +5,8 @@
 
 //#include <math.h>
 
+p_node init_node(node **head, int srcID);
+
 p_node addNode(node **head, int srcID);
 
 void addNode_CMD(node **head) {
@@ -38,13 +40,7 @@ void addNode_CMD(node **head) {
 }
 
 p_node addNode(node **head, int srcID) {
-    p_node input_node = (node *) malloc(sizeof(node));
-    if (input_node == NULL) { // check if memory was successfully allocated
-        return NULL;
-    }
-    input_node->next = NULL;
-    input_node->node_id = srcID;
-    input_node->edges = NULL;
+    p_node input_node = init_node(head, srcID);
     if (*head == NULL) {
         *head = input_node;
         return input_node;
@@ -82,6 +78,27 @@ p_node addNode(node **head, int srcID) {
     return NULL;
 }
 
+p_node init_node(node **head, int srcID) {
+    p_node input_node = (node *) malloc(sizeof(node));
+    if (input_node == NULL) { // check if memory was successfully allocated
+        return NULL;
+    }
+    input_node->next = NULL;
+    input_node->node_id = srcID;
+    input_node->edges = NULL;
+    return input_node;
+}
+
+p_edge init_edge(node **currNode, int srcID) {
+    p_edge input_edge = (edge *) calloc(1, sizeof(edge));
+    if (input_edge == NULL) { // check if memory was successfully allocated
+        return NULL;
+    }
+    input_edge->next = NULL;
+    input_edge->dest_node = srcID;
+    input_edge->weight = NULL;
+    return input_edge;
+}
 
 void buildGraph_CMD(p_node *head) {
     deleteGraph_CMD(head);
