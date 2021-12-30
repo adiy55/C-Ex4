@@ -1,42 +1,32 @@
 #ifndef C_EX4_ALGO_H
 #define C_EX4_ALGO_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "node.h"
+#include "edge.h"
+
 char ACTION;
+int NUM_NODES, CURR_NODE;
 
-typedef struct graph_node *p_node;
-
-typedef struct graph_edge {
-    int weight;
-    p_node dest_node;
-    struct graph_edge *next;
-} edge, *p_edge;
-
-
-typedef struct graph_node {
-    int node_id;
-    p_edge edges; // edges out of the node
-    struct graph_node *next;
-} node, *p_node;
+typedef struct GRAPH_NODE *NodeP, Node;
+typedef struct GRAPH_EDGE *EdgeP, Edge;
 
 // cmd functions
-void buildGraph_CMD(p_node *head);
-void addNode_CMD(node **head);
-void deleteNode_CMD(p_node *head);
-void printGraph_CMD(p_node head); // for self debug
-void deleteGraph_CMD(p_node* head);
-void shortestPath_CMD(p_node head);
-void TSP_CMD(p_node head);
+void deleteNode_CMD(NodeP *head);
+void printGraph_CMD(NodeP head); // for self debug
+void deleteGraph_CMD(NodeP* head);
+void shortestPath_CMD(NodeP head);
+void TSP_CMD(NodeP head);
 
 // helper functions
-void free_node(p_node n);
-p_node findNode(p_node *head, int idx); // return 0 if found - otherwise return 1
-p_edge findEdge(p_node curr_node, int destID);
-void addEdge(p_node src, p_node dest, int weight);
-void freeEdge(p_edge *edges, p_node node);
+void checkIfAllocated(void *p);
+void initNodes(NodeP *head);
+void initEdges(NodeP *head);
 
 // algorithms
-int shortestPath(p_node src, p_node dest);
+int shortestPath(NodeP src, NodeP dest);
 int dijkstra();
 
 
-#endif //C_EX4_ALGO_H
+#endif

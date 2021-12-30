@@ -1,46 +1,50 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "node.h"
 #include "edge.h"
 #include "algo.h"
 
 int main() {
-    int run = 1;//, len_path;
-//    char action = 'A';
     // action A: insert a new graph
-    // action B: create new node with new out edges
-    // action D: delete node
-    // action P: print node
+    // action B: create new Node with new out edges
+    // action D: delete Node
+    // action P: print Node
     // action S: shortest path between two given nodes
     // action T: TSP
-//    scanf("%c", &action);
-    scanf("%c", &ACTION);
-    p_node head = NULL;
-    while (run) {
+    NodeP head = NULL;
+    while (scanf("%c", &ACTION)) {
+        if (ACTION == '\n') {
+            printGraph_CMD(head);
+            deleteNode_CMD(&head);
+            break;
+        }
         if (ACTION == 'A') {
             deleteGraph_CMD(&head);
-//            scanf("%d", &k);
-//            head = generate(k);
-            buildGraph_CMD(&head);
+            scanf("%d", &NUM_NODES);
+            initNodes(&head);
+        }
+        if (ACTION == 'n') {
+            scanf("%d", &CURR_NODE);
+            initEdges(&head);
         }
         if (ACTION == 'B') {
-            addNode_CMD(&head);
+            scanf("%d", &CURR_NODE);
+            addNode(&head, CURR_NODE);
+            initEdges(&head);
         }
-//        if (ACTION == 'p') {
-//            printGraph_CMD(head);
-//            run = 0;
-//        }
-        printGraph_CMD(head);
-//        if (ACTION == 'S') {
+        if (ACTION == 'S') {
 //            shortestPath_CMD(head);
-//        }
-//        if (ACTION == 'D') {
-//            deleteNode_CMD(&head);
-//        }
-//        if (ACTION == 'T') {
+        }
+        if (ACTION == 'D') {
+            deleteNode_CMD(&head);
+            head = NULL;
+        }
+        if (ACTION == 'E') {
+            printGraph_CMD(head);
+            return 0;
+        }
+        if (ACTION == 'T') {
 //            TSP_CMD(head);
-//        }
-        if (ACTION == '\n') {
-            run = 0;
         }
     }
     return 0;

@@ -14,25 +14,25 @@ all: graphProg
 graphProg: $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
 	$(CC) $(FLAGS) -o graphProg $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
 
-lib_algo.a: $(OBJECTS_ALGO)
-	$(AR) -rcs lib_algo.a $(OBJECTS_ALGO) # creates static library
+lib_algo.a: $(OBJECTS_ALGO) $(OBJECTS_EDGE) $(OBJECTS_NODE)
+	$(AR) -rcs lib_algo.a $(OBJECTS_ALGO) $(OBJECTS_EDGE) $(OBJECTS_NODE) # creates static library
 
-lib_node.a: $(OBJECTS_NODE)
-	$(AR) -rcs lib_node.a $(OBJECTS_NODE) # create static library
+lib_node.a: $(OBJECTS_NODE) $(OBJECTS_EDGE) $(OBJECTS_ALGO)
+	$(AR) -rcs lib_node.a $(OBJECTS_NODE) $(OBJECTS_EDGE) $(OBJECTS_ALGO) # create static library
 
-lib_edge.a: $(OBJECTS_EDGE)
-	$(AR) -rcs lib_edge.a $(OBJECTS_EDGE) # create static library
+lib_edge.a: $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_ALGO)
+	$(AR) -rcs lib_edge.a $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_ALGO) # create static library
 
 main.o: main.c
 	$(CC) $(FLAGS) -c main.c
 
-algo.o: algo.c $(ALGO_HEADER)
+algo.o: algo.c $(ALGO_HEADER) $(EDGE_HEADER) $(NODE_HEADER)
 	$(CC) $(FLAGS) -c algo.c
 
-node.o: node.c $(NODE_HEADER)
+node.o: node.c $(NODE_HEADER) $(EDGE_HEADER) $(ALGO_HEADER)
 	$(CC) $(FLAGS) -c node.c
 
-edge.o: edge.c $(EDGE_HEADER)
+edge.o: edge.c $(EDGE_HEADER) $(NODE_HEADER) $(ALGO_HEADER)
 	$(CC) $(FLAGS) -c edge.c
 
 clean:
