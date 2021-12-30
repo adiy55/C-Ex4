@@ -15,7 +15,7 @@ int main() {
     while (scanf("%c", &ACTION)) {
         if (ACTION == '\n') {
             printGraph_CMD(head);
-            deleteNode_CMD(&head);
+            deleteGraph_CMD(&head);
             break;
         }
         if (ACTION == 'A') {
