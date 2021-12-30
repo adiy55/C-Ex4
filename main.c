@@ -35,6 +35,6 @@ int main() {
             printGraph_CMD(head);
         }
     }
-    deleteGraph_CMD(&head);
+//    deleteGraph_CMD(&head); // todo: fix memory free
     return 0;
 }
