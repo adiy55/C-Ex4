@@ -4,15 +4,15 @@
 void addEdge(NodeP src, NodeP dest, int weight) {
     EdgeP check = findEdge(src, dest->node_id);
     if (check) {
-        freeEdge(&(src->edges), dest);
+        freeEdge(src, dest);
     }
     EdgeP new_edge = (Edge *) malloc(sizeof(Edge));
     checkIfAllocated(new_edge);
     new_edge->dest_node = dest;
     new_edge->weight = weight;
+    new_edge->next = NULL;
     EdgeP tmp = src->edges;
     if (tmp == NULL) {
-        new_edge->next = NULL;
         src->edges = new_edge;
         return;
     }
@@ -35,29 +35,27 @@ EdgeP findEdge(NodeP src_node, int destID) {
 }
 
 void freeEdges(NodeP *head, NodeP n) {
-    while (*head != NULL) {
-        if (*head != n) {
-            freeEdge((EdgeP *) (*head)->edges, n);
+    NodeP iter = *head;
+    while (iter != NULL) {
+        if (iter != n && iter->edges != NULL) {
+            freeEdge(iter, n);
         }
+        iter = iter->next;
     }
 }
 
-void freeEdge(EdgeP *edges, NodeP node) { // Node is the dest Node of the Edge (what we want to delete)
-    if (*edges == NULL) { // empty linked list
-        return;
-    }
-    EdgeP iter = *edges;
-    if (iter->next == NULL) { // one Edge in list
-        if (iter->dest_node == node) {
-            free(iter);
-        }
-        return;
-    }
-    while (iter->next != NULL) { // two or more edges in list
-        if (iter->next->dest_node == node) {
-            EdgeP tmp = iter->next;
-            iter->next = iter->next->next;
-            free(tmp);
+void freeEdge(NodeP src, NodeP dest) { // Node is the dest Node of the Edge (what we want to delete)
+    EdgeP iter = src->edges;
+    if (iter->next == NULL && iter->dest_node == dest) { // one Edge in list
+        free(iter);
+    } else {
+        while (iter->next != NULL) { // two or more edges in list
+            if (iter->next->dest_node == dest) {
+                EdgeP tmp = iter->next;
+                iter = iter->next->next;
+                free(tmp);
+            }
+            iter = iter->next;
         }
     }
 }

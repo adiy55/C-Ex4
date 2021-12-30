@@ -12,40 +12,29 @@ int main() {
     // action S: shortest path between two given nodes
     // action T: TSP
     NodeP head = NULL;
-    while (scanf("%c", &ACTION)) {
-        if (ACTION == '\n') {
-            printGraph_CMD(head);
-            deleteGraph_CMD(&head);
-            break;
-        }
+    while (scanf("%c", &ACTION) && ACTION != '\n') {
         if (ACTION == 'A') {
             deleteGraph_CMD(&head);
+            head = NULL;
             scanf("%d", &NUM_NODES);
             initNodes(&head);
-        }
-        if (ACTION == 'n') {
+        } else if (ACTION == 'n') {
             scanf("%d", &CURR_NODE);
             initEdges(&head);
-        }
-        if (ACTION == 'B') {
+        } else if (ACTION == 'B') {
             scanf("%d", &CURR_NODE);
             addNode(&head, CURR_NODE);
             initEdges(&head);
-        }
-        if (ACTION == 'S') {
+        } else if (ACTION == 'S') {
 //            shortestPath_CMD(head);
-        }
-        if (ACTION == 'D') {
+        } else if (ACTION == 'D') {
             deleteNode_CMD(&head);
-            head = NULL;
-        }
-        if (ACTION == 'E') {
-            printGraph_CMD(head);
-            return 0;
-        }
-        if (ACTION == 'T') {
+        } else if (ACTION == 'T') {
 //            TSP_CMD(head);
+        } else if (ACTION == 'P') { // for debugging
+            printGraph_CMD(head);
         }
     }
+    deleteGraph_CMD(&head);
     return 0;
 }

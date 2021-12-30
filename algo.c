@@ -19,7 +19,7 @@ void initEdges(NodeP *head) {
         printf("ERROR! NO SRC NODE! %d", CURR_NODE);
         exit(1);
     }
-    while (scanf("%d%d", &d, &weight)) {
+    while (scanf("%d %d", &d, &weight)) {
         dest = findNode(head, d);
         if(!dest){
             printf("ERROR! NO DEST NODE!");
