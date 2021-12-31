@@ -52,7 +52,7 @@ void freeEdge(NodeP src, NodeP dest) { // Node is the dest Node of the Edge (wha
         while (iter->next != NULL) { // two or more edges in list
             if (iter->next->dest_node == dest) {
                 EdgeP tmp = iter->next;
-                iter = iter->next->next;
+                iter->next = iter->next->next;
                 free(tmp);
             }
             iter = iter->next;
