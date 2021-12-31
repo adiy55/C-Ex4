@@ -34,7 +34,7 @@ EdgeP findEdge(NodeP src_node, int destID) {
     return NULL;
 }
 
-void freeEdges(NodeP *head, NodeP n) {
+void freeEdges(NodeP *head, NodeP n) { // free edges that have n as dest
     NodeP iter = *head;
     while (iter != NULL) {
         if (iter != n && iter->edges != NULL) {
@@ -44,16 +44,18 @@ void freeEdges(NodeP *head, NodeP n) {
     }
 }
 
-void freeEdge(NodeP src, NodeP dest) { // Node is the dest Node of the Edge (what we want to delete)
-    EdgeP iter = src->edges;
-    if (iter->next == NULL && iter->dest_node == dest) { // one Edge in list
-        free(iter);
+void freeEdge(NodeP src, NodeP dest) {
+    EdgeP iter = src->edges, target;
+    if (iter->dest_node == dest) { // one / first edge in list
+        target = iter;
+        src->edges = src->edges->next;
+        free(target);
     } else {
         while (iter->next != NULL) { // two or more edges in list
             if (iter->next->dest_node == dest) {
-                EdgeP tmp = iter->next;
+                target = iter->next;
                 iter->next = iter->next->next;
-                free(tmp);
+                free(target);
             }
             iter = iter->next;
         }

@@ -45,5 +45,21 @@ void freeNode(NodeP *head, NodeP n) {
         e = e->next;
         free(tmp);
     }
-    free(n);
+    n->edges = NULL;
+    NodeP iter = *head, target;
+    if (iter == n) {
+        target = iter;
+        *head = iter->next;
+        free(target);
+    } else {
+        while (iter->next != NULL) {
+            if (iter->next == n) {
+                target = iter->next;
+                iter->next = iter->next->next;
+                free(target);
+                break;
+            }
+            iter = iter->next;
+        }
+    }
 }

@@ -33,7 +33,7 @@ void deleteNode_CMD(NodeP *head) {
     int reqNode;
     scanf("%d", &reqNode);
     NodeP n = findNode(head, reqNode);
-    if (!n) {
+    if (n) {
         freeNode(head, n);
     }
 }

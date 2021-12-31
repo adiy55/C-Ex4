@@ -15,7 +15,7 @@ int main() {
     while (scanf("%c", &ACTION) && ACTION != '\n') {
         if (ACTION == 'A') {
             deleteGraph_CMD(&head);
-            head = NULL;
+//            head = NULL;
             scanf("%d", &NUM_NODES);
             initNodes(&head);
         } else if (ACTION == 'n') {
@@ -35,6 +35,6 @@ int main() {
             printGraph_CMD(head);
         }
     }
-//    deleteGraph_CMD(&head); // todo: fix memory free
+    deleteGraph_CMD(&head);
     return 0;
 }
