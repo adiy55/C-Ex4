@@ -1,5 +1,4 @@
 #include "edge.h"
-#include "algo.h"
 
 void addEdge(NodeP src, NodeP dest, int weight) {
     EdgeP check = findEdge(src, dest->node_id);

@@ -11,6 +11,7 @@ typedef struct GRAPH_NODE {
     int node_id;
     EdgeP edges; // edges out of the Node
     struct GRAPH_NODE *next;
+    int dist;
 } Node, *NodeP;
 
 void addNode(Node **head, int srcID);

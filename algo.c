@@ -29,6 +29,23 @@ void initEdges(NodeP *head) {
     }
 }
 
+void initHeap(NodeP *head, NodeP n) {
+    MIN_HEAP = createHeap();
+    if (*head == NULL) {
+        return;
+    }
+    NodeP iter = *head;
+    while (iter != NULL) {
+        if (iter == n) {
+            iter->dist = 0;
+        } else {
+            iter->dist = INT_MAX;
+        }
+        push(&MIN_HEAP, iter);
+        iter = iter->next;
+    }
+}
+
 void deleteNode_CMD(NodeP *head) {
     int reqNode;
     scanf("%d", &reqNode);
