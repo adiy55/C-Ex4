@@ -128,8 +128,8 @@ void TSP_CMD(NodeP head) {
                 exit(1);
             }
         }
-        permutation(head,list,0,n_cities);
-        printf("%d",MIN_TSP);
+        permutation(head, list, 0, n_cities - 1);
+        printf("%d", MIN_TSP);
 
     }
 }
@@ -147,7 +147,7 @@ void permutation(NodeP head, int *arr, int start, int end) {
     if (start == end) {
         int sum = 0;
         for (int i = 0; i < end - 1; ++i) {
-            NodeP currNode = findNode(head, arr[i]);
+            NodeP currNode = findNode(&head, arr[i]);
             EdgeP currEdge = findEdge(currNode, arr[i + 1]);
             if (currEdge != NULL) {
                 sum += currEdge->weight;
@@ -165,7 +165,7 @@ void permutation(NodeP head, int *arr, int start, int end) {
         //fixing one first digit
         //and calling permutation on
         //the rest of the digits
-        permutation(head,arr, start + 1, end);
+        permutation(head, arr, start + 1, end);
         swapInt((arr + i), (arr + start));
     }
 }

@@ -45,18 +45,17 @@ void freeEdges(NodeP *head, NodeP n) { // free edges that have n as dest
 
 void freeEdge(NodeP src, NodeP dest) {
     EdgeP iter = src->edges, target;
-    if (iter->dest_node == dest) { // one / first edge in list
+    while (iter->next != NULL) { // two or more edges in list
+        if (iter->next->dest_node == dest) {
+            target = iter->next;
+            iter->next = iter->next->next;
+            free(target);
+        }
+        iter = iter->next;
+    }
+    if (iter->dest_node == dest) {
         target = iter;
         src->edges = src->edges->next;
         free(target);
-    } else {
-        while (iter->next != NULL) { // two or more edges in list
-            if (iter->next->dest_node == dest) {
-                target = iter->next;
-                iter->next = iter->next->next;
-                free(target);
-            }
-            iter = iter->next;
-        }
     }
 }

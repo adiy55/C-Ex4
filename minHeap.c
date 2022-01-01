@@ -28,14 +28,18 @@ void swap(Heap *h, int i, int j) {
 
 int min(Heap *h, int i, int j) {
     int m = h->size;
+    if (i >= m || j >= m) {
+        return m;
+    }
     int left = h->nodes[i]->dist;
     int right = h->nodes[j]->dist;
     int max = h->nodes[m]->dist;
     if (i <= h->size && left < max) {
         m = i;
     }
-    if (j <= h->size && right < max)
+    if (j <= h->size && right < max) {
         m = j;
+    }
     return m;
 }
 
@@ -44,7 +48,7 @@ NodeP pop(Heap *h) {
     NodeP v = h->nodes[0];
     while (1) {
         int j = min(h, 2 * i + 1, 2 * i + 2); // min val between children
-        if (j == h->size) {
+        if (j >= h->size) {
             break;
         }
         h->nodes[i] = h->nodes[j];
