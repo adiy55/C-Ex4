@@ -8,6 +8,7 @@ void addNode(Node **head, int srcID) {
     input_node->edges = NULL;
     NodeP check = findNode(head, srcID), tmp;
     if (check) {
+        updateEdgeDest(head, input_node, check);
         freeNode(head, check, 0);
     }
     if (*head == NULL) {
@@ -17,6 +18,19 @@ void addNode(Node **head, int srcID) {
         tmp = *head;
         *head = input_node;
         input_node->next = tmp;
+    }
+}
+
+void updateEdgeDest(NodeP *head, NodeP input_node, NodeP check) {
+    NodeP iter = *head;
+    while (iter != NULL) {
+        if (iter != check) {
+            EdgeP e = findEdge(iter, check->node_id);
+            if (e != NULL) {
+                e->dest_node = input_node;
+            }
+        }
+        iter = iter->next;
     }
 }
 
