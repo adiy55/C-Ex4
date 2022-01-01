@@ -31,6 +31,7 @@ void checkIfAllocated(void *p);
 void initNodes(NodeP *head);
 void initEdges(NodeP *head);
 void initHeap(NodeP *head, NodeP n);
+int contains(int arr[], int nodeID, int len);
 
 // algorithms
 void dijkstra(NodeP head, int target);
