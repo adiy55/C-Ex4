@@ -21,7 +21,7 @@ Heap MIN_HEAP;
 
 // cmd functions
 void deleteNode_CMD(NodeP *head);
-void printGraph_CMD(NodeP head); // for self debug
+void printGraph_CMD(NodeP head); // for debugging
 void deleteGraph_CMD(NodeP* head);
 void shortestPath_CMD(NodeP head);
 void TSP_CMD(NodeP head);

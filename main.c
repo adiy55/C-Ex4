@@ -34,11 +34,8 @@ int main() {
         } else if (ACTION == 'P') { // for debugging
             printGraph_CMD(head);
         }
-//        if (ACTION == 'H') {
-//            NodeP n = findNode(&head, 1);
-//            initHeap(&head, n);
-//        }
     }
     deleteGraph_CMD(&head);
+    printf("\n");
     return 0;
 }

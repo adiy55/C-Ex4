@@ -15,7 +15,7 @@ typedef struct GRAPH_NODE {
 } Node, *NodeP;
 
 void addNode(Node **head, int srcID);
-void freeNode(NodeP *head, NodeP n);
+void freeNode(NodeP *head, NodeP n, int delete_graph);
 NodeP findNode(NodeP *head, int idx);
 
 #endif

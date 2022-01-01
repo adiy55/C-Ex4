@@ -53,7 +53,7 @@ void deleteNode_CMD(NodeP *head) {
     scanf("%d", &reqNode);
     NodeP n = findNode(head, reqNode);
     if (n) {
-        freeNode(head, n);
+        freeNode(head, n, 0);
     }
 }
 
@@ -65,7 +65,7 @@ void deleteGraph_CMD(NodeP *head) {
     while (iter != NULL) {
         tmp = iter;
         iter = iter->next;
-        freeNode(head, tmp);
+        freeNode(head, tmp, 1);
     }
 }
 
@@ -89,7 +89,7 @@ void shortestPath_CMD(NodeP head) {
         NodeP d = findNode(&head, dest);
         if (d) {
             int res = d->dist == INT_MAX ? -1 : d->dist;
-            printf("%d", res);
+            printf("%d ", res);
         }
     }
 }
@@ -129,7 +129,7 @@ void TSP_CMD(NodeP head) {
             }
         }
         permutation(head, list, 0, n_cities - 1);
-        printf("%d", MIN_TSP);
+        printf("%d ", MIN_TSP);
 
     }
 }

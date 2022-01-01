@@ -15,7 +15,7 @@ typedef struct GRAPH_EDGE {
 
 void addEdge(NodeP src, NodeP dest, int weight);
 EdgeP findEdge(NodeP src_node, int destID);
-void freeEdges(NodeP *head, NodeP n);
+void freeEdges(NodeP head, NodeP n);
 void freeEdge(NodeP src, NodeP dest);
 
 #endif

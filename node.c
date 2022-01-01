@@ -8,7 +8,7 @@ void addNode(Node **head, int srcID) {
     input_node->edges = NULL;
     NodeP check = findNode(head, srcID), tmp;
     if (check) {
-        freeNode(head, check);
+        freeNode(head, check, 0);
     }
     if (*head == NULL) {
         *head = input_node;
@@ -34,11 +34,13 @@ NodeP findNode(NodeP *head, int idx) {
     return NULL;
 }
 
-void freeNode(NodeP *head, NodeP n) {
+void freeNode(NodeP *head, NodeP n, int delete_graph) {
     if (*head == NULL) {
         return;
     }
-    freeEdges(head, n);
+    if (!delete_graph) {
+        freeEdges(*head, n);
+    }
     EdgeP e = n->edges, tmp;
     while (e != NULL) {
         tmp = e;

@@ -33,13 +33,12 @@ EdgeP findEdge(NodeP src_node, int destID) {
     return NULL;
 }
 
-void freeEdges(NodeP *head, NodeP n) { // free edges that have n as dest
-    NodeP iter = *head;
-    while (iter != NULL) {
-        if (iter != n && iter->edges != NULL) {
-            freeEdge(iter, n);
+void freeEdges(NodeP head, NodeP n) { // free edges that have n as dest
+    while (head != NULL) {
+        if (head != n && head->edges != NULL) {
+            freeEdge(head, n);
         }
-        iter = iter->next;
+        head = head->next;
     }
 }
 
