@@ -12,8 +12,6 @@ typedef struct GRAPH_EDGE *EdgeP, Edge;
 
 typedef struct HEAP {
     NodeP *nodes; // pointer to nodes // heap
-    int *prev; // pointer to previous node
-    int prev_len;
     int size;
 } Heap;
 
@@ -35,11 +33,10 @@ void initEdges(NodeP *head);
 void initHeap(NodeP *head, NodeP n);
 
 // algorithms
-int shortestPath(NodeP src, NodeP dest);
-int dijkstra();
+void dijkstra(NodeP head, int target);
+void TSP(NodeP head, int list[]);
 
 // min heap
-Heap createHeap();
 void push(Heap *h, NodeP v);
 void heapifyUp(Heap *h, int pos);
 void swap(Heap *h, int i, int j);

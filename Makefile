@@ -24,7 +24,7 @@ lib_node.a: $(OBJECTS_NODE) $(OBJECTS_EDGE) $(OBJECTS_ALGO)
 lib_edge.a: $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_ALGO)
 	$(AR) -rcs lib_edge.a $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_ALGO) # create static library
 
-main.o: main.c
+main.o: main.c $(ALGO_HEADER)
 	$(CC) $(FLAGS) -c main.c
 
 minHeap.o: minHeap.c $(ALGO_HEADER) $(EDGE_HEADER) $(NODE_HEADER)

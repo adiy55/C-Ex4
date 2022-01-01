@@ -15,13 +15,13 @@ void initNodes(NodeP *head) {
 void initEdges(NodeP *head) {
     int d, weight;
     NodeP src = findNode(head, CURR_NODE), dest;
-    if(!src){
+    if (!src) {
         printf("ERROR! NO SRC NODE! %d", CURR_NODE);
         exit(1);
     }
     while (scanf("%d %d", &d, &weight)) {
         dest = findNode(head, d);
-        if(!dest){
+        if (!dest) {
             printf("ERROR! NO DEST NODE!");
             exit(1);
         }
@@ -30,10 +30,12 @@ void initEdges(NodeP *head) {
 }
 
 void initHeap(NodeP *head, NodeP n) {
-    MIN_HEAP = createHeap();
     if (*head == NULL) {
         return;
     }
+    MIN_HEAP.nodes = malloc(NUM_NODES * sizeof(NodeP));
+    checkIfAllocated(MIN_HEAP.nodes);
+    MIN_HEAP.size = -1;
     NodeP iter = *head;
     while (iter != NULL) {
         if (iter == n) {
@@ -79,3 +81,40 @@ void printGraph_CMD(NodeP head) { // for self debug
         printf("\n");
     }
 }
+
+void shortestPath_CMD(NodeP head) {
+    int src, dest;
+    if (scanf("%d %d", &src, &dest)) {
+        dijkstra(head, src);
+        NodeP d = findNode(&head, dest);
+        if (d) {
+            int res = d->dist == INT_MAX ? -1 : d->dist;
+            printf("%d", res);
+        }
+    }
+}
+
+void dijkstra(NodeP head, int target) {
+    NodeP n = findNode(&head, target), curr;
+    EdgeP iter;
+    initHeap(&head, n);
+    while (MIN_HEAP.size >= 0) {
+        curr = pop(&MIN_HEAP);
+        iter = curr->edges;
+        while (iter != NULL) {
+            if (curr->dist != INT_MAX) {
+                int curr_dist = curr->dist + iter->weight;
+                if (iter->dest_node->dist > curr_dist) {
+                    iter->dest_node->dist = curr_dist;
+                }
+            }
+            iter = iter->next;
+        }
+    }
+    free(MIN_HEAP.nodes);
+    MIN_HEAP.nodes = NULL;
+}
+
+//void TSP(NodeP head, int list[]){
+//
+//}

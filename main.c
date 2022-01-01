@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "algo.h"
-#include "node.h"
-#include "edge.h"
 
 int main() {
     // action A: insert a new graph
@@ -27,7 +25,7 @@ int main() {
             NUM_NODES++;
             initEdges(&head);
         } else if (ACTION == 'S') {
-//            shortestPath_CMD(head);
+            shortestPath_CMD(head);
         } else if (ACTION == 'D') {
             deleteNode_CMD(&head);
             NUM_NODES--;
@@ -36,6 +34,10 @@ int main() {
         } else if (ACTION == 'P') { // for debugging
             printGraph_CMD(head);
         }
+//        if (ACTION == 'H') {
+//            NodeP n = findNode(&head, 1);
+//            initHeap(&head, n);
+//        }
     }
     deleteGraph_CMD(&head);
     return 0;

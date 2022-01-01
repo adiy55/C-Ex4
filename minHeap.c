@@ -1,14 +1,5 @@
 #include "algo.h"
 
-Heap createHeap() {
-    Heap *h = calloc(1, sizeof(Heap));
-    h->nodes = calloc(NUM_NODES, sizeof(int));
-    h->prev = calloc(NUM_NODES, sizeof(int));
-    h->size = -1;
-    h->prev_len = -1;
-    return *h;
-}
-
 void push(Heap *h, NodeP v) {
     if (h->size == (NUM_NODES - 1)) {
         return;
@@ -63,8 +54,4 @@ NodeP pop(Heap *h) {
     h->size--;
     return v;
 }
-
-//void dijkstra(Heap *h, int a, int b) {
-//
-//}
 
