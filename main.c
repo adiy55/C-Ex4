@@ -36,6 +36,5 @@ int main() {
         }
     }
     deleteGraph_CMD(&head);
-    printf("\n");
     return 0;
 }

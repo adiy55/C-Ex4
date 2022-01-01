@@ -89,7 +89,7 @@ void shortestPath_CMD(NodeP head) {
         NodeP d = findNode(&head, dest);
         if (d) {
             int res = d->dist == INT_MAX ? -1 : d->dist;
-            printf("%d ", res);
+            printf("Dijsktra shortest path: %d \n", res);
         }
     }
 }
@@ -129,24 +129,22 @@ void TSP_CMD(NodeP head) {
             }
         }
         permutation(head, list, 0, n_cities - 1);
-        printf("%d ", MIN_TSP);
+        printf("TSP shortest path: %d \n", MIN_TSP);
 
     }
 }
 
-//function to swap the variables
-void swapInt(int *a, int *b) {
+void swapInt(int *a, int *b) { //function to swap the variables
     int temp;
     temp = *a;
     *a = *b;
     *b = temp;
 }
 
-//permutation function
 void permutation(NodeP head, int *arr, int start, int end) {
     if (start == end) {
         int sum = 0;
-        for (int i = 0; i < end - 1; ++i) {
+        for (int i = 0; i < end; i++) {
             NodeP currNode = findNode(&head, arr[i]);
             EdgeP currEdge = findEdge(currNode, arr[i + 1]);
             if (currEdge != NULL) {
@@ -160,11 +158,7 @@ void permutation(NodeP head, int *arr, int start, int end) {
     }
     int i;
     for (i = start; i <= end; i++) {
-        //swapping numbers
         swapInt((arr + i), (arr + start));
-        //fixing one first digit
-        //and calling permutation on
-        //the rest of the digits
         permutation(head, arr, start + 1, end);
         swapInt((arr + i), (arr + start));
     }
