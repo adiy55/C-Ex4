@@ -189,3 +189,32 @@ void dijkstra(NodeP head, int target) {
 //    return -1;
 //}
 
+//function to swap the variables
+void swapInt(int *a, int *b)
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+//permutation function
+void permutation(int *arr, int start, int end)
+{
+    if(start==end)
+    {
+//        printarray(arr, end+1); - Should be added to the array
+        return;
+    }
+    int i;
+    for(i=start;i<=end;i++)
+    {
+        //swapping numbers
+        swapInt((arr+i), (arr+start));
+        //fixing one first digit
+        //and calling permutation on
+        //the rest of the digits
+        permutation(arr, start+1, end);
+        swapInt((arr+i), (arr+start));
+    }
+}
