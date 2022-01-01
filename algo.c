@@ -129,6 +129,7 @@ void TSP_CMD(NodeP head) {
             }
         }
         permutation(head, list, 0, n_cities - 1);
+        MIN_TSP = MIN_TSP == INT_MAX ? -1 : MIN_TSP;
         printf("TSP shortest path: %d \n", MIN_TSP);
 
     }
