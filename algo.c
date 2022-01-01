@@ -115,83 +115,27 @@ void dijkstra(NodeP head, int target) {
     MIN_HEAP.nodes = NULL;
 }
 
-//void TSP_CMD(NodeP head) {
-//    int n_cities = 0, num;
-//    if (scanf("%d", &n_cities)) {
-//        int list[n_cities];
-//        for (int i = 0; i < n_cities; ++i) {
-//            if (scanf("%d", &num)) {
-//                list[i] = num; // list contains the node ids
-//            } else {
-//                printf("INVALID INPUT!");
-//                exit(1);
-//            }
-//        }
-//        TSP(head, list, n_cities);
-//    }
-//}
+void TSP_CMD(NodeP head) {
+    int n_cities = 0, num;
+    MIN_TSP = INT_MAX;
+    if (scanf("%d", &n_cities)) {
+        int list[n_cities];
+        for (int i = 0; i < n_cities; ++i) {
+            if (scanf("%d", &num)) {
+                list[i] = num; // list contains the node ids
+            } else {
+                printf("INVALID INPUT!");
+                exit(1);
+            }
+        }
+        permutation(head,list,0,n_cities);
+        printf("%d",MIN_TSP);
 
-// min([0, 2] + d(2, 1))
-// min([0, 2] + d(2, 3))
-// min([0, 2] + d(2, 4))
-
-// min([0, 3] + d(3, 1)) = 30
-// min([0, 3] + d(3, 2)) =
-// min([0, 3] + d(3, 4))
-
-// min([{2}, 3] + d(3, 4), [{3}, 2] + d(2, 4))
-// min([{2, 3}, 4 + d(4, 1)]
-
-//
-
-//void TSP(NodeP head, int list[], int n_cities) {
-////    NodeP homeNode = findNode(head, list[0]);
-//    int visited[6] = {0};
-//    int res = 0, next_node, curr_node = 0;
-//    for (int i = 0; i < n_cities; ++i) {
-//        int curr_min = INT_MAX, flag = 0;
-//        for (int j = 0; j < n_cities; j++) {
-//            if (visited[curr_node] == 0) {
-//                dijkstra(head, list[curr_node]);
-//                NodeP iter = head;
-//                while (iter != NULL) {
-//                    if (iter->node_id != list[curr_node]) {
-//                        next_node = contains(list, iter->node_id, n_cities);
-//                        if (next_node != -1 && iter->dist < curr_min) {
-//                            curr_min = iter->dist;
-//                            flag = 1;
-//                        }
-//                    }
-//                    iter = iter->next;
-//                }
-//                if (!flag) {
-//                    visited[curr_node] = 1;
-//                    res += curr_min;
-//                    curr_node = next_node;
-//                    flag = 0;
-//                }
-//            }
-//        }
-//        for (int j = 0; j < n_cities; ++j) {
-//            if(visited[j]==0){
-//
-//            }
-//        }
-//    }
-//}
-//
-//int contains(int arr[], int nodeID, int len) {
-//    for (int i = 0; i < len; ++i) {
-//        if (arr[i] == nodeID) {
-//            return i;
-//        }
-//    }
-//    return -1;
-//}
+    }
+}
 
 //function to swap the variables
-void swapInt(int *a, int *b)
-{
+void swapInt(int *a, int *b) {
     int temp;
     temp = *a;
     *a = *b;
@@ -199,22 +143,29 @@ void swapInt(int *a, int *b)
 }
 
 //permutation function
-void permutation(int *arr, int start, int end)
-{
-    if(start==end)
-    {
-//        printarray(arr, end+1); - Should be added to the array
+void permutation(NodeP head, int *arr, int start, int end) {
+    if (start == end) {
+        int sum = 0;
+        for (int i = 0; i < end - 1; ++i) {
+            NodeP currNode = findNode(head, arr[i]);
+            EdgeP currEdge = findEdge(currNode, arr[i + 1]);
+            if (currEdge != NULL) {
+                sum += currEdge->weight;
+            } else {
+                return;
+            }
+        }
+        MIN_TSP = (sum < MIN_TSP) ? sum : MIN_TSP;
         return;
     }
     int i;
-    for(i=start;i<=end;i++)
-    {
+    for (i = start; i <= end; i++) {
         //swapping numbers
-        swapInt((arr+i), (arr+start));
+        swapInt((arr + i), (arr + start));
         //fixing one first digit
         //and calling permutation on
         //the rest of the digits
-        permutation(arr, start+1, end);
-        swapInt((arr+i), (arr+start));
+        permutation(head,arr, start + 1, end);
+        swapInt((arr + i), (arr + start));
     }
 }

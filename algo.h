@@ -16,7 +16,7 @@ typedef struct HEAP {
 } Heap;
 
 char ACTION;
-int NUM_NODES, CURR_NODE;
+int NUM_NODES, CURR_NODE, MIN_TSP;
 Heap MIN_HEAP;
 
 // cmd functions
@@ -31,7 +31,8 @@ void checkIfAllocated(void *p);
 void initNodes(NodeP *head);
 void initEdges(NodeP *head);
 void initHeap(NodeP *head, NodeP n);
-int contains(int arr[], int nodeID, int len);
+void permutation(NodeP head, int *arr, int start, int end);
+void swapInt(int *a, int *b);
 
 // algorithms
 void dijkstra(NodeP head, int target);

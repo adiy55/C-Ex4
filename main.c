@@ -30,7 +30,7 @@ int main() {
             deleteNode_CMD(&head);
             NUM_NODES--;
         } else if (ACTION == 'T') {
-//            TSP_CMD(head);
+            TSP_CMD(head);
         } else if (ACTION == 'P') { // for debugging
             printGraph_CMD(head);
         }
