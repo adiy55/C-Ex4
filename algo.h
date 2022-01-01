@@ -35,7 +35,7 @@ int contains(int arr[], int nodeID, int len);
 
 // algorithms
 void dijkstra(NodeP head, int target);
-void TSP(NodeP head, int list[]);
+void TSP(NodeP head, int list[], int);
 
 // min heap
 void push(Heap *h, NodeP v);
