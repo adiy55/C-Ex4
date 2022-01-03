@@ -135,7 +135,7 @@ void TSP_CMD(NodeP head) {
     }
 }
 
-void swapInt(int *a, int *b) { //function to swap the variables
+void swapInt(int *a, int *b) { // function to swap the variables
     int temp;
     temp = *a;
     *a = *b;
@@ -148,8 +148,8 @@ void permutation(NodeP head, int *arr, int start, int end) {
         for (int i = 0; i < end; i++) {
             NodeP currNode = findNode(&head, arr[i]);
             EdgeP currEdge = findEdge(currNode, arr[i + 1]);
-            dijkstra(head,arr[i]);
-            currNode = findNode(&head,arr[i+1]);
+            dijkstra(head, arr[i]);
+            currNode = findNode(&head, arr[i + 1]);
             if (currEdge != NULL) {
                 sum += currNode->dist;
             } else {

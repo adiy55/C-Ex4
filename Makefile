@@ -10,10 +10,10 @@ NODE_HEADER = node.h
 ALGO_HEADER = algo.h
 FLAGS = -Wall -g
 
-all: graphProg
+all: graph
 
-graphProg: $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
-	$(CC) $(FLAGS) -o graphProg $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
+graph: $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
+	$(CC) $(FLAGS) -o graph $(OBJECTS_MAIN) lib_edge.a lib_node.a lib_algo.a
 
 lib_algo.a: $(OBJECTS_ALGO) $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_HEAP)
 	$(AR) -rcs lib_algo.a $(OBJECTS_ALGO) $(OBJECTS_EDGE) $(OBJECTS_NODE) $(OBJECTS_HEAP) # creates static library
@@ -40,4 +40,4 @@ edge.o: edge.c $(EDGE_HEADER) $(NODE_HEADER) $(ALGO_HEADER)
 	$(CC) $(FLAGS) -c edge.c
 
 clean:
-	rm -f *.o *.a graphProg
+	rm -f *.o *.a graph
