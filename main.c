@@ -9,8 +9,9 @@ int main() {
     // action P: print Node
     // action S: shortest path between two given nodes
     // action T: TSP
+    ACTION = 'P';
     NodeP head = NULL;
-    while (scanf("%c", &ACTION) && ACTION != '\n') {
+    while (scanf("%c", &ACTION) && ACTION != '\n' && ACTION != EOF) {
         if (ACTION == 'A') {
             deleteGraph_CMD(&head);
             head = NULL;
